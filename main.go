@@ -26,6 +26,7 @@ The following commands are available:
 	A rn <name>		# Renames the entity under the cursor with <name>.
 	A share			# Uploads the selected snippet to play.golang.org and prints the URL.
 	A what			# Shows basic information about the selected syntax node.
+	A key	        # Turns an unkeyed struct into a keyed struct.
 
 <scope> is a comma-separated list of packages the analysis should be limited to, this parameter is optional.
 
@@ -35,6 +36,7 @@ The following tools are used:
 	github.com/godoctor/godoctor
 	github.com/zmb3/gogetdoc
 	github.com/josharian/impl
+	honnef.co/go/tools/cmd/keyify
 */
 package main
 
@@ -68,6 +70,7 @@ Commands:
 	refs	shows all refs to the entity denoted by selected identifier
 	share	uploads the selected code to play.golang.org
 	what	shows basic information about the selected syntax node
+	key     turns the selected struct into a keyed struct
 `
 
 var cmds = map[string]func(selection, []string){
@@ -88,6 +91,7 @@ var cmds = map[string]func(selection, []string){
 	"rn":    rename,
 	"share": share,
 	"what":  what,
+	"key":   keyify,
 }
 
 func main() {
